@@ -1,15 +1,17 @@
+import axios from 'axios'
+
 // ------------------------------------
 // Constants
 // ------------------------------------
 export const SELECT_SONG = 'SELECT_SONG'
-export const UNSELECT_SONG = 'UNSELECT_SONG'
+export const POST_VOTE = 'POST_VOTE'
 
 // ------------------------------------
 // Actions
 // ------------------------------------
 export function selectSong(id) {
   return {
-    type : SELECT_SONG,
+    type: SELECT_SONG,
     id
   }
 }
@@ -18,36 +20,46 @@ export function selectSong(id) {
     returns a function for lazy evaluation. It is incredibly useful for
     creating async actions, especially when combined with redux-thunk! */
 
-// export const doubleAsync = () => {
-//   return (dispatch, getState) => {
-//     return new Promise((resolve) => {
-//       setTimeout(() => {
-//         dispatch({
-//           type    : COUNTER_DOUBLE_ASYNC,
-//           payload : getState().counter
-//         })
-//         resolve()
-//       }, 200)
-//     })
-//   }
-// }
+export const vote = (token) => {
+  return (dispatch, getState) => {
+    // return axios.post('/vote', {
+    //   amount: ,
+    //   songs: [ids],
+    //   name: ,
+    //   email: ,
+    //   token,
+    // })
+    // .then(() => {
+    //   dispatch({
+    //     type: POST_VOTE,
+    //     vote:
+    //   })
+    // })
+    // .catch(console.log)
+  }
+}
 
 export const actions = {
-  selectSong
+  selectSong,
+  vote
 }
 
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [SELECT_SONG] : (state, action) => {
+  [SELECT_SONG]: (state, action) => {
     const newState = { ...state };
     newState.songData[action.id].isSelected = !state.songData[action.id].isSelected;
     return {
       ...newState,
     }
   },
-  [UNSELECT_SONG] : (state, action) => state * 2
+  [POST_VOTE]: (state, action) => {
+    return {
+      ...state
+    }
+  }
 }
 
 // ------------------------------------
@@ -82,7 +94,7 @@ const initialState = {
   }
 }
 
-export default function counterReducer (state = initialState, action) {
+export default function counterReducer(state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
 
   return handler ? handler(state, action) : state

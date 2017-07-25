@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import createStore from './store/createStore'
+import {StripeProvider} from 'react-stripe-elements';
 import './styles/main.scss'
 
 // Store Initialization
@@ -16,7 +17,9 @@ let render = () => {
   const routes = require('./routes/index').default(store)
 
   ReactDOM.render(
-    <App store={store} routes={routes} />,
+    <StripeProvider apiKey="pk_test_TxhSEO8iN2JAda1rvpV8bqxh">
+      <App store={store} routes={routes} />
+    </StripeProvider>,
     MOUNT_NODE
   )
 }

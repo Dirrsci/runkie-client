@@ -29,7 +29,6 @@
         "uninitialized": "always"
     }],
     "quotes": [ 2, "single" ],
-    "semi": [ 2, "always" ],
     "space-before-blocks": [ 2 ],
     "space-before-function-paren": [ 2, "never" ],
     "space-in-parens": [ 2 ],
