@@ -7,10 +7,10 @@ export const UNSELECT_SONG = 'UNSELECT_SONG'
 // ------------------------------------
 // Actions
 // ------------------------------------
-export function selectSong (songName) {
+export function selectSong(id) {
   return {
     type : SELECT_SONG,
-    songName
+    id
   }
 }
 
@@ -40,8 +40,12 @@ export const actions = {
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [SELECT_SONG]    : (state, action) => {
-    return state.songData[action.song]
+  [SELECT_SONG] : (state, action) => {
+    const newState = { ...state };
+    newState.songData[action.id].isSelected = !state.songData[action.id].isSelected;
+    return {
+      ...newState,
+    }
   },
   [UNSELECT_SONG] : (state, action) => state * 2
 }
@@ -51,14 +55,33 @@ const ACTION_HANDLERS = {
 // ------------------------------------
 const initialState = {
   songData: {
-    'Something To Say': false
-    'Mermandingo': false
-    'Red Hat': false
-    'Call Your Bluff': false
-    'Cold Hearted Whine': false
-    'The Vogue': false
+    Something_To_Say_1: {
+      title: 'Something To Say',
+      isSelected: false
+    },
+    Mermandingo_1: {
+      title: 'Mermandingo',
+      isSelected: false
+    },
+    Red_Hat_1: {
+      title: 'Red Hat',
+      isSelected: false
+    },
+    Call_Your_Bluff_1: {
+      title: 'Call Your Bluff',
+      isSelected: false
+    },
+    Cold_Hearted_Whine_1: {
+      title: 'Cold Hearted Whine',
+      isSelected: false
+    },
+    The_Vogue_1: {
+      title: 'The Vogue',
+      isSelected: false
+    }
   }
 }
+
 export default function counterReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
 
