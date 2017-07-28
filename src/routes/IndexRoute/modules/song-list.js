@@ -25,7 +25,7 @@ export const vote = (token) => {
     const { songData } = getState().index
     const songs = Object.keys(songData).filter((songId) => songData[songId].isSelected)
 
-    return axios.post('/vote', {
+    return axios.post('http://localhost:8080/vote', {
       songs,
       name: 'something',
       email: 's@mething',
