@@ -17,6 +17,7 @@ export default class HomeView extends React.Component {
   onCellClick(original) {
     const { isSelected, id, title } = original;
     const { selectSong } = this.props;
+
     return () => {
       selectSong(id)
     }

@@ -22,20 +22,23 @@ export function selectSong(id) {
 
 export const vote = (token) => {
   return (dispatch, getState) => {
-    // return axios.post('/vote', {
-    //   amount: ,
-    //   songs: [ids],
-    //   name: ,
-    //   email: ,
-    //   token,
-    // })
-    // .then(() => {
-    //   dispatch({
-    //     type: POST_VOTE,
-    //     vote:
-    //   })
-    // })
-    // .catch(console.log)
+    const { songData } = getState().index
+    const songs = songData.filter((song) => song.isSelected).map(song => song.id)
+
+    return axios.post('/vote', {
+      amount: 'idk',
+      songs,
+      name: 'something',
+      email: 's@mething',
+      token
+    })
+    .then(() => {
+      dispatch({
+        type: POST_VOTE,
+        vote: 'change pages'
+      })
+    })
+    .catch(console.log)
   }
 }
 
@@ -49,10 +52,10 @@ export const actions = {
 // ------------------------------------
 const ACTION_HANDLERS = {
   [SELECT_SONG]: (state, action) => {
-    const newState = { ...state };
-    newState.songData[action.id].isSelected = !state.songData[action.id].isSelected;
+    const newState = { ...state }
+    newState.songData[action.id].isSelected = !state.songData[action.id].isSelected
     return {
-      ...newState,
+      ...newState
     }
   },
   [POST_VOTE]: (state, action) => {

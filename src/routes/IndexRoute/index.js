@@ -26,6 +26,6 @@ export default (store) => ({
       cb(null, Index)
 
     /* Webpack named bundle   */
-  }, 'index')
+    }, 'index')
   }
 })
