@@ -23,10 +23,9 @@ export function selectSong(id) {
 export const vote = (token) => {
   return (dispatch, getState) => {
     const { songData } = getState().index
-    const songs = songData.filter((song) => song.isSelected).map(song => song.id)
+    const songs = Object.keys(songData).filter((songId) => songData[songId].isSelected)
 
     return axios.post('/vote', {
-      amount: 'idk',
       songs,
       name: 'something',
       email: 's@mething',
@@ -58,7 +57,7 @@ const ACTION_HANDLERS = {
       ...newState
     }
   },
-  [POST_VOTE]: (state, action) => {
+  [POST_VOTE]: (state/*, action*/) => {
     return {
       ...state
     }
