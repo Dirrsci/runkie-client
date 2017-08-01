@@ -13,27 +13,49 @@ export default class HomeView extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getSongCounts();
+    this.props.getSongsWithVotes();
+    console.log('this.props: ', this.props);
+  }
+
+
+  getLabels() {
+    const songs = this.props.songs && this.props.songs.data;
+    if (!songs) return;
+    return songs.map((song) => { return song.title });
+  }
+
+  getCounts() {
+    const songs = this.props.songs && this.props.songs.data;
+    if (!songs) return;
+    return songs.map((song) => { return song.count });
   }
 
   render() {
     console.log('this.props.songs: ', this.props.songs);
-    const { songData, vote } = this.props;
     let data = {
-      labels: this.data.labels,
+      labels: this.getLabels(),
       datasets: [
         {
           label: 'Votes',
-          data: this.data.counts
+          data: this.getCounts()
         }
       ]
     }
 
-
-
     return (
       <div className="index-container">
-        <HorizontalBar />
+        <HorizontalBar
+          data={data}
+          legend={{ display: false }}
+          scales={{
+            xAxes: [{
+              ticks: {
+                beginAtZero: true,
+                stepSize: 1
+              }
+            }]
+          }}
+        />
         test test test
 
       </div>
