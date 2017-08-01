@@ -5,6 +5,7 @@ import axios from 'axios'
 // ------------------------------------
 export const SELECT_SONG = 'SELECT_SONG'
 export const POST_VOTE = 'POST_VOTE'
+export const GET_SONGS = 'GET_SONGS'
 
 // ------------------------------------
 // Actions
@@ -14,6 +15,19 @@ export function selectSong(id) {
     type: SELECT_SONG,
     id
   }
+}
+
+export function getSongs() {
+  return ((dispatch, getState) => {
+    return axios.get(`${API_URL}/songs`)
+      .then((songs) => {
+        dispatch({
+          type: GET_SONGS,
+          songs: songs
+        })
+      })
+      .catch(console.log);
+  });
 }
 
 /*  This is a thunk, meaning it is a function that immediately
@@ -43,7 +57,8 @@ export const vote = (token, name, email) => {
 
 export const actions = {
   selectSong,
-  vote
+  vote,
+  getSongs
 }
 
 // ------------------------------------
