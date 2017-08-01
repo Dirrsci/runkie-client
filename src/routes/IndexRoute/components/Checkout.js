@@ -1,5 +1,6 @@
 // / CheckoutForm.js
 import React from 'react';
+import { withRouter } from 'react-router';
 import { injectStripe, CardNumberElement, CardExpiryElement, CardCVCElement, PostalCodeElement } from 'react-stripe-elements';
 import TextInput from '../../../components/shared/TextInput';
 
@@ -44,7 +45,7 @@ class CheckoutForm extends React.Component {
         return this.props.vote(res.token, this.name.value, this.email.value)
       })
       .then(() => {
-        console.log('done voting');
+        this.props.router.push('/results');
       })
 
     // However, this line of code will do the same thing:
@@ -81,4 +82,4 @@ class CheckoutForm extends React.Component {
   }
 }
 
-export default injectStripe(CheckoutForm);
+export default withRouter(injectStripe(CheckoutForm));
