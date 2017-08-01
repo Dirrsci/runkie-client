@@ -7,11 +7,34 @@ import TextInput from '../../../components/shared/TextInput';
 // import CardSection from './CardSection';
 
 class CheckoutForm extends React.Component {
+  constructor(props) {
+    super(props)
+
+    // inital error state
+    this.state = {
+      error: {
+        name: false,
+        email: false
+      }
+    }
+  }
+
   handleSubmit = (ev) => {
-    console.log(this.name.value);
-    console.log(this.email.value);
     // We don't want to let default form submission happen here, which would refresh the page.
     ev.preventDefault()
+
+    this.setState({ error: {} })
+
+    const name = this.name.value
+    const email = this.email.value
+    if (!name) {
+      this.setState({ error: { name: true } })
+      return alert('Missing name')
+    }
+    if (!email) {
+      this.setState({ error: { email: true } })
+      return alert('Missing email')
+    }
 
     // Within the context of `Elements`, this call to createToken knows which Element to
     // tokenize, since there's only one in this group.
@@ -33,6 +56,7 @@ class CheckoutForm extends React.Component {
           className="text-input"
           placeholder="name"
           cref={(ref) => this.name = ref}
+          error={this.state.error.name}
         />
         <TextInput
           type="email"
@@ -40,6 +64,7 @@ class CheckoutForm extends React.Component {
           className="text-input"
           placeholder="email"
           cref={(ref) => this.email = ref}
+          error={this.state.error.email}
         />
 
         <CardNumberElement />

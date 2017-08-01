@@ -13,7 +13,8 @@ export default class extends React.Component {
   }
 
   render() {
-    const { type, name, className, placeholder, cref } = this.props;
+    const { type, name, className, placeholder, cref, error } = this.props;
+    let style = error ? { background: 'red' } : {};
     return (
       <input
         type={type}
@@ -23,6 +24,7 @@ export default class extends React.Component {
         value={this.state.value}
         onChange={this.handleChange}
         ref={cref}
+        style={style}
       />
     );
   }

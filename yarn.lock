@@ -4814,6 +4814,13 @@ react-redux@^5.0.4:
     loose-envify "^1.1.0"
     prop-types "^15.0.0"
 
+react-responsive-audio-player@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/react-responsive-audio-player/-/react-responsive-audio-player-1.1.4.tgz#8539ad8828b60eaff371b77d9613b7e0d3d4f6cb"
+  dependencies:
+    prop-types "^15.5.10"
+    resize-observer-polyfill "^1.4.2"
+
 react-router@^3.0.0:
   version "3.0.5"
   resolved "https://registry.yarnpkg.com/react-router/-/react-router-3.0.5.tgz#c3b7873758045a8bbc9562aef4ff4bc8cce7c136"
@@ -5142,6 +5149,10 @@ require-uncached@^1.0.2:
 requires-port@1.x.x:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
+
+resize-observer-polyfill@^1.4.2:
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/resize-observer-polyfill/-/resize-observer-polyfill-1.4.2.tgz#a37198e6209e888acb1532a9968e06d38b6788e5"
 
 resolve-from@^1.0.0:
   version "1.0.1"
