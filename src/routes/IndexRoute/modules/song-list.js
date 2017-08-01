@@ -33,15 +33,15 @@ export function getSongs() {
     returns a function for lazy evaluation. It is incredibly useful for
     creating async actions, especially when combined with redux-thunk! */
 
-export const vote = (token) => {
+export const vote = (token, name, email) => {
   return (dispatch, getState) => {
     const { songData } = getState().index
     const songs = Object.keys(songData).filter((songId) => songData[songId].isSelected)
 
-    return axios.post('http://localhost:8080/vote', {
+    return axios.post(API_URL, {
       songs,
-      name: 'something',
-      email: 's@mething',
+      name,
+      email,
       token
     })
     .then(() => {
