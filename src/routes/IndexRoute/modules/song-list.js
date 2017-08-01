@@ -1,10 +1,12 @@
 import axios from 'axios'
+import config from 'config';
 
 // ------------------------------------
 // Constants
 // ------------------------------------
 export const SELECT_SONG = 'SELECT_SONG'
 export const POST_VOTE = 'POST_VOTE'
+export const GET_SONGS = 'GET_SONGS'
 
 // ------------------------------------
 // Actions
@@ -13,6 +15,17 @@ export function selectSong(id) {
   return {
     type: SELECT_SONG,
     id
+  }
+}
+
+export function getSongs() {
+  return (dispatch, getState) => {
+    return axios.get()
+  }
+
+
+  return {
+    type: GET_SONGS
   }
 }
 
@@ -43,7 +56,8 @@ export const vote = (token) => {
 
 export const actions = {
   selectSong,
-  vote
+  vote,
+  getSongs
 }
 
 // ------------------------------------
