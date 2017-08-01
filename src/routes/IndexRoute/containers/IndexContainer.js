@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { selectSong, vote } from '../modules/song-list'
+import { getSongs, selectSong, vote } from '../modules/song-list'
 
 /*  This is a container component. Notice it does not contain any JSX,
     nor does it import React. This component is **only** responsible for
@@ -14,13 +14,15 @@ import IndexView from '../components/IndexView'
 
 const mapDispatchToProps = {
   selectSong,
-  vote
+  vote,
+  getSongs
 }
 
 const mapStateToProps = (state) => {
-  const { songData } = state.index
+  let { songs } = state.index
+  if (songs) songs = Object.keys(songs).map((id) => ({ id, ...songs[id] }))
   return ({
-    songData: Object.keys(songData).map((id) => ({ id, ...songData[id] }))
+    songs
   })
 }
 
