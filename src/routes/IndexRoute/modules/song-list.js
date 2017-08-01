@@ -1,5 +1,4 @@
 import axios from 'axios'
-import config from 'config';
 
 // ------------------------------------
 // Constants
@@ -19,14 +18,16 @@ export function selectSong(id) {
 }
 
 export function getSongs() {
-  return (dispatch, getState) => {
-    return axios.get()
-  }
-
-
-  return {
-    type: GET_SONGS
-  }
+  return ((dispatch, getState) => {
+    return axios.get(`${API_URL}/songs`)
+      .then((songs) => {
+        dispatch({
+          type: GET_SONGS,
+          songs: songs
+        })
+      })
+      .catch(console.log);
+  });
 }
 
 /*  This is a thunk, meaning it is a function that immediately

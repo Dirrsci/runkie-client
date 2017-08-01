@@ -2,16 +2,19 @@ import React from 'react'
 import ReactTable from 'react-table'
 import Checkout from './Checkout'
 import { Elements } from 'react-stripe-elements'
+import classnames from 'classnames';
 
 import 'react-table/react-table.css'
 import './IndexView.scss'
 
 export default class HomeView extends React.Component {
   constructor(props) {
-    super(props)
-    this.onCellClick = this.onCellClick.bind(this)
-    this.cell = this.cell.bind(this)
-    this.columns = this.columns.bind(this)
+    super(props);
+    this.state = {};
+    this.onCellClick = this.onCellClick.bind(this);
+    this.voteCell = this.voteCell.bind(this);
+    this.audioPlaybackCell = this.audioPlaybackCell.bind(this);
+    this.columns = this.columns.bind(this);
   }
 
   onCellClick(original) {
@@ -19,7 +22,7 @@ export default class HomeView extends React.Component {
     return () => this.props.selectSong(original.id)
   }
 
-  cell(c) {
+  voteCell(c) {
     const { isSelected } = c.original;
     return (
       <div onClick={this.onCellClick(c.original)}>
@@ -28,10 +31,19 @@ export default class HomeView extends React.Component {
     )
   }
 
+  audioPlaybackCell(c) {
+    return (
+      <div onClick={this.togglePlay}>
+        <i className={classnames("fa", {"fa-play": !this.state.is_playing, "fa-pause": this.state.is_playing})} aria-hidden="true"></i>
+      </div>
+    )
+  }
+
   columns() {
     const columns = []
-    columns.push({ Header: 'Select', accessor: 'isSelected', Cell: this.cell })
-    columns.push({ Header: 'Song Title', accessor: 'title' })
+    columns.push({ Header: '', sortable: false, resizable: false, Cell: this.audioPlaybackCell });
+    columns.push({ Header: 'Select', accessor: 'isSelected', Cell: this.voteCell });
+    columns.push({ Header: 'Song Title', accessor: 'title' });
     return columns
   }
 
