@@ -12,3 +12,21 @@
 .text-input {
   display: flex;
 }
+
+.song-player-container {
+  align-items: center;
+  display: flex;
+}
+
+.audio-player {
+  display: none;
+}
+
+.play-button {
+  color: black;
+  flex: 1;
+}
+
+.song-title {
+  flex: 10;
+}
