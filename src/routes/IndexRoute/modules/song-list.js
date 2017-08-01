@@ -23,7 +23,7 @@ export function getSongs() {
       .then((songs) => {
         dispatch({
           type: GET_SONGS,
-          songs: songs
+          songs: songs.data
         })
       })
       .catch(console.log);
@@ -46,6 +46,7 @@ export const vote = (token, name, email) => {
       token
     })
     .then(() => {
+      // payment was successful
       dispatch({
         type: POST_VOTE,
         vote: 'change pages'
@@ -67,7 +68,7 @@ export const actions = {
 const ACTION_HANDLERS = {
   [SELECT_SONG]: (state, action) => {
     const newState = { ...state }
-    newState.songData[action.id].isSelected = !state.songData[action.id].isSelected
+    newState.songs[action.id].isSelected = !state.songs[action.id].isSelected
     return {
       ...newState
     }
@@ -76,42 +77,25 @@ const ACTION_HANDLERS = {
     return {
       ...state
     }
+  },
+  [GET_SONGS]: (state, action) => {
+    const songs = {}
+    for (let i = 0; i < action.songs.length; i++) {
+      const song = action.songs[i]
+      songs[song.id] = song
+      songs[song.id].isSelected = false
+    }
+    return {
+      ...state,
+      songs
+    }
   }
 }
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
-const initialState = {
-  songData: {
-    Something_To_Say_1: {
-      title: 'Something To Say',
-      isSelected: false
-    },
-    Mermandingo_1: {
-      title: 'Mermandingo',
-      isSelected: false
-    },
-    Red_Hat_1: {
-      title: 'Red Hat',
-      isSelected: false
-    },
-    Call_Your_Bluff_1: {
-      title: 'Call Your Bluff',
-      isSelected: false
-    },
-    Cold_Hearted_Whine_1: {
-      title: 'Cold Hearted Whine',
-      isSelected: false
-    },
-    The_Vogue_1: {
-      title: 'The Vogue',
-      isSelected: false
-    }
-  }
-}
-
-export default function counterReducer(state = initialState, action) {
+export default function counterReducer(state = {}, action) {
   const handler = ACTION_HANDLERS[action.type]
 
   return handler ? handler(state, action) : state

@@ -12,17 +12,17 @@ import './IndexView.scss'
 export default class HomeView extends React.Component {
   constructor(props) {
     super(props)
-
-    // current playing song
-    this.players = {};
-
     this.state = {};
-
+    this.players = {}; // current playing song
     this.onCellClick = this.onCellClick.bind(this)
     this.selectCell = this.selectCell.bind(this)
     this.songCell = this.songCell.bind(this)
     this.play = this.play.bind(this)
     this.columns = this.columns.bind(this)
+  }
+
+  componentDidMount() {
+    this.props.getSongs()
   }
 
   onCellClick(original) {
@@ -63,6 +63,7 @@ export default class HomeView extends React.Component {
   songCell(c) {
     const { id, title } = c.original
     const { currentPlay } = this.state
+
     return (
       <div className="song-player-container">
         <FontAwesome name={currentPlay === id ? 'stop' : 'play'} className="play-button"
@@ -70,7 +71,7 @@ export default class HomeView extends React.Component {
         <div className="song-title">{title}</div>
 
         <audio className="audio-player" controls="controls" data-test={id} preload ref={(ref) => this.players[id] = ref} >
-          <source src="http://archive.org/download/rumpkemb2017-04-08.a24bit/rumpkemb04082017a24bit12.mp3" type="audio/mp3" />
+          <source src={`http://archive.org/download/${c.original.url}`} type="audio/mp3" />
           Your browser does not support the audio element.
         </audio>
       </div>
@@ -84,27 +85,30 @@ export default class HomeView extends React.Component {
     return columns
   }
 
-  getNumSelected(songData) {
+  getNumSelected(song) {
     // add up all songs voted for
-    return [0, ...songData].reduce((sum, b) => {
+    return [0, ...song].reduce((sum, b) => {
       return b.isSelected ? sum + 1 : sum
     })
   }
 
   render() {
-    const { songData, vote } = this.props;
+    const { songs, vote } = this.props;
+    if (!this.props.songs) {
+      return (<div className=""> testinf </div>);
+    }
     return (
       <div className="index-container">
         <ReactTable
           minRows={3}
-          data={songData}
+          data={songs}
           columns={this.columns()}
         />
 
         <Elements>
           <Checkout vote={vote}/>
         </Elements>
-        You selected {this.getNumSelected(songData)} songs
+        You selected {this.getNumSelected(songs)} songs
       </div>
     )
   }
