@@ -39,7 +39,7 @@ export const vote = (token, name, email) => {
     let { songs } = getState().index
     songs = Object.keys(songs).filter((songId) => songs[songId].isSelected)
 
-    return axios.post(API_URL, {
+    return axios.post(`${API_URL}/vote`, {
       songs,
       name,
       email,
