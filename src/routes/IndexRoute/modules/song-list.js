@@ -52,7 +52,6 @@ export const vote = (token, name, email) => {
         vote: 'change pages'
       })
     })
-    .catch(console.log)
   }
 }
 

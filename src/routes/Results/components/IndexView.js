@@ -31,7 +31,6 @@ export default class HomeView extends React.Component {
   }
 
   render() {
-    console.log('this.props.songs: ', this.props.songs);
     let data = {
       labels: this.getLabels(),
       datasets: [
@@ -47,17 +46,17 @@ export default class HomeView extends React.Component {
         <HorizontalBar
           data={data}
           legend={{ display: false }}
-          scales={{
-            xAxes: [{
-              ticks: {
-                beginAtZero: true,
-                stepSize: 1
-              }
-            }]
+          options={{
+            scales: {
+              xAxes: [{
+                ticks: {
+                  beginAtZero: true,
+                  stepSize: 1
+                }
+              }]
+            }
           }}
         />
-        test test test
-
       </div>
     )
   }

@@ -95,7 +95,7 @@ export default class HomeView extends React.Component {
   render() {
     const { songs, vote } = this.props;
     if (!this.props.songs) {
-      return (<div className=""> testinf </div>);
+      return (<div> Error requesting page </div>);
     }
     return (
       <div className="index-container">

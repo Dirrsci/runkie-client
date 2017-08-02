@@ -17,7 +17,6 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = (state) => {
-  console.log('results:', state.results);
   return {
     songs: state.results.songs
   }
