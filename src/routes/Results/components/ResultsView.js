@@ -30,14 +30,17 @@ export default class HomeView extends React.Component {
   }
 
   render() {
-    console.log('this.props.songs: ', this.props.songs);
     let data = {
       labels: this.getLabels(),
       datasets: [
         {
           label: 'Votes',
           data: this.getCounts(),
-          backgroundColor: ['#613d90', '#2a854f', '#613d90', '#2a854f',]
+          backgroundColor: ['#613d90', '#2a854f', '#613d90', '#2a854f', '#613d90',
+                            '#2a854f', '#613d90', '#2a854f', '#613d90', '#2a854f',
+                            '#613d90', '#2a854f', '#613d90', '#2a854f', '#613d90',
+                            '#2a854f', '#613d90', '#2a854f', '#613d90', '#2a854f',
+                            '#613d90', '#2a854f', '#613d90', '#2a854f', '#613d90']
         }
       ]
     }
@@ -49,17 +52,18 @@ export default class HomeView extends React.Component {
           <HorizontalBar
             data={data}
             legend={{ display: false }}
-            scales={{
-              xAxes: [{
-                ticks: {
-                  beginAtZero: true,
-                  stepSize: 1
-                }
-              }]
-            }}
-          />
-        </div>
+            options={{
+              scales: {
+                xAxes: [{
+                  ticks: {
+                    beginAtZero: true,
+                    stepSize: 1
+                  }
+                }]
+              }
+            }} />
       </div>
+    </div>
     )
   }
 }

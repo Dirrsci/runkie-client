@@ -103,7 +103,7 @@ export default class HomeView extends React.Component {
   render() {
     const { songs, vote } = this.props;
     if (!this.props.songs) {
-      return (<div className=""> Loading... </div>);
+      return (<div> Error requesting page </div>);
     }
     console.log('style: ', require('./modal-styles.js'));
     return (

@@ -39,14 +39,17 @@ class CheckoutForm extends React.Component {
 
     // Within the context of `Elements`, this call to createToken knows which Element to
     // tokenize, since there's only one in this group.
-    this.props.stripe.createToken({name: 'Jenny Rosen'})
+    this.props.stripe.createToken({ name })
       .then((res) => {
         if (res.error) return alert(res.error.message)
         return this.props.vote(res.token, this.name.value, this.email.value)
+          .then(() => {
+            this.props.router.push('/results');
+          });
       })
-      .then(() => {
-        this.props.router.push('/results');
-      })
+      .catch((err) => {
+        alert(JSON.parse(err.request.responseText).message)
+      });
 
     // However, this line of code will do the same thing:
     // this.props.stripe.createToken({type: 'card', name: 'Jenny Rosen'});
