@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactTable from 'react-table'
 import Checkout from './Checkout'
+import ReactModal from 'react-modal'
 import { Elements } from 'react-stripe-elements'
 
 // import AudioPlayer from 'react-responsive-audio-player'
@@ -34,7 +35,10 @@ export default class HomeView extends React.Component {
     const { isSelected } = c.original;
     return (
       <div onClick={this.onCellClick(c.original)}>
-        {JSON.stringify(isSelected)}
+        <div className="squaredFour">
+          <input type="checkbox" value="None" id="squaredFour" name="check" checked={(isSelected) ? true : false} />
+          <label for="squaredFour"></label>
+        </div>
       </div>
     )
   }
@@ -68,8 +72,6 @@ export default class HomeView extends React.Component {
       <div className="song-player-container">
         <FontAwesome name={currentPlay === id ? 'stop' : 'play'} className="play-button"
           onClick={this.play(id)} />
-        <div className="song-title">{title}</div>
-
         <audio className="audio-player" controls="controls" data-test={id} preload ref={(ref) => this.players[id] = ref} >
           <source src={`http://archive.org/download/${c.original.url}`} type="audio/mp3" />
           Your browser does not support the audio element.
@@ -78,10 +80,16 @@ export default class HomeView extends React.Component {
     )
   }
 
+  titleCell(c) {
+    const { title } = c.original;
+    return <div className="song-title">{title}</div>
+  }
+
   columns() {
     const columns = []
-    columns.push({ Header: 'Select', accessor: 'isSelected', Cell: this.selectCell })
-    columns.push({ Header: 'Song Title', accessor: 'title', Cell: this.songCell })
+    columns.push({ Header: 'Preview', accessor: 'title', Cell: this.songCell })
+    columns.push({ Header: 'Song Title', accessor: 'title', Cell: this.titleCell })
+    columns.push({ Header: '', accessor: 'isSelected', Cell: this.selectCell })
     return columns
   }
 
@@ -95,20 +103,41 @@ export default class HomeView extends React.Component {
   render() {
     const { songs, vote } = this.props;
     if (!this.props.songs) {
-      return (<div className=""> testinf </div>);
+      return (<div className=""> Loading... </div>);
     }
+    console.log('style: ', require('./modal-styles.js'));
     return (
       <div className="index-container">
-        <ReactTable
-          minRows={3}
-          data={songs}
-          columns={this.columns()}
-        />
+        <div className="ballot-table">
+          <ReactTable
+            minRows={3}
+            data={songs}
+            columns={this.columns()}
+            showPagination={false}
+            showPageSizeOptions={false}
+            showPageJump={false}
+            sortable={false}
+          />
+          <div className="songsSelectedInfo">You selected {this.getNumSelected(songs)} songs</div>
+        </div>
 
-        <Elements>
-          <Checkout vote={vote}/>
-        </Elements>
-        You selected {this.getNumSelected(songs)} songs
+        <div className="cast-ballot-container">
+          <button onClick={() => this.setState({modalOpen: true})}>
+            Cast Ballot!
+          </button>
+        </div>
+
+        <ReactModal
+          isOpen={this.state.modalOpen}
+          contentLabel="Payment Modal"
+          onRequestClose={() => this.setState({modalOpen: false})}
+          style={require('./modal-styles.js').default}
+        >
+          <h2 className="checkout-header">Payment Information</h2>
+          <Elements>
+            <Checkout vote={vote}/>
+          </Elements>
+        </ReactModal>
       </div>
     )
   }

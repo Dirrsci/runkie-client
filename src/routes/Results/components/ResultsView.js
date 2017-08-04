@@ -2,7 +2,7 @@ import React from 'react'
 import { HorizontalBar } from 'react-chartjs-2'
 
 import 'react-table/react-table.css'
-import './IndexView.scss'
+import './ResultsView.scss'
 
 export default class HomeView extends React.Component {
   constructor(props) {
@@ -14,7 +14,6 @@ export default class HomeView extends React.Component {
 
   componentDidMount() {
     this.props.getSongsWithVotes();
-    console.log('this.props: ', this.props);
   }
 
 
@@ -37,27 +36,29 @@ export default class HomeView extends React.Component {
       datasets: [
         {
           label: 'Votes',
-          data: this.getCounts()
+          data: this.getCounts(),
+          backgroundColor: ['#613d90', '#2a854f', '#613d90', '#2a854f',]
         }
       ]
     }
 
     return (
-      <div className="index-container">
-        <HorizontalBar
-          data={data}
-          legend={{ display: false }}
-          scales={{
-            xAxes: [{
-              ticks: {
-                beginAtZero: true,
-                stepSize: 1
-              }
-            }]
-          }}
-        />
-        test test test
-
+      <div>
+        <h2 style={{color: '#ffffff'}}>Current Standings</h2>
+        <div className="results-container">
+          <HorizontalBar
+            data={data}
+            legend={{ display: false }}
+            scales={{
+              xAxes: [{
+                ticks: {
+                  beginAtZero: true,
+                  stepSize: 1
+                }
+              }]
+            }}
+          />
+        </div>
       </div>
     )
   }

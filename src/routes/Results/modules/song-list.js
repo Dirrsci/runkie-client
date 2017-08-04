@@ -18,7 +18,7 @@ export function getSongsWithVotes() {
           songs: songs
         })
       })
-      .catch(console.log);
+      .catch((err) => console.log(err));
   });
 }
 

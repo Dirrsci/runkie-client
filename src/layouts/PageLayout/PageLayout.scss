@@ -1,5 +1,13 @@
 .page-layout__viewport {
-  padding-top: 4rem;
+  // padding-top: 4rem;
+}
+
+a a:hover, a:active, a:focus {
+  outline: 0;
+}
+
+button:focus {
+  outline:0;
 }
 
 .page-layout__nav-item--active {

@@ -8,7 +8,7 @@
 import { injectReducer } from '../../store/reducers'
 
 export default (store) => ({
-  path: 'results',
+  path: 'rules',
   /*  Async getComponent is only invoked when route matches   */
   getComponent(nextState, cb) {
     /*  Webpack - use 'require.ensure' to create a split point
@@ -16,11 +16,7 @@ export default (store) => ({
     require.ensure([], (require) => {
       /*  Webpack - use require callback to define
           dependencies for bundling   */
-      const Index = require('./containers/ResultsContainer').default
-      const reducer = require('./modules/song-list').default
-
-      /*  Add the reducer to the store on key 'results'  */
-      injectReducer(store, { key: 'results', reducer })
+      const Index = require('./containers/RulesContainer').default
 
       /*  Return getComponent   */
       cb(null, Index)
