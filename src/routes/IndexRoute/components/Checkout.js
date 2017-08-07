@@ -20,6 +20,15 @@ class CheckoutForm extends React.Component {
     }
   }
 
+  calculateTotal() {
+    let { songs } = this.props;
+    if (songs.length === 0) return 0;
+    if (songs.length === 1) return 3;
+    if (songs.length === 2) return 5;
+    return songs.length * 2;
+
+  }
+
   handleSubmit = (ev) => {
     // We don't want to let default form submission happen here, which would refresh the page.
     ev.preventDefault()
@@ -58,27 +67,27 @@ class CheckoutForm extends React.Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit} className="index-container">
-        <TextInput
+        <div className="checkout-input"><TextInput
           type="text"
           name="name"
           className="text-input"
           placeholder="name"
           cref={(ref) => this.name = ref}
           error={this.state.error.name}
-        />
-        <TextInput
+        /></div>
+        <div className="checkout-input"><TextInput
           type="email"
           name="email"
           className="text-input"
           placeholder="email"
           cref={(ref) => this.email = ref}
           error={this.state.error.email}
-        />
+        /></div>
 
-        <CardNumberElement />
-        <CardExpiryElement />
-        <CardCVCElement />
-        <PostalCodeElement />
+        <div className="checkout-input"><CardNumberElement style={{base: {lineHeight: '50px'}}}/></div>
+        <div className="checkout-input"><CardExpiryElement style={{base: {lineHeight: '50px'}}}/></div>
+        <div className="checkout-input"><CardCVCElement style={{base: {lineHeight: '50px'}}}/></div>
+        <div className="checkout-input"><PostalCodeElement style={{base: {lineHeight: '50px'}}}/></div>
         <button>Confirm order</button>
       </form>
     );

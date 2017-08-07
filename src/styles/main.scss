@@ -152,7 +152,7 @@ h1 {
 
 h2.checkout-header {
   text-align: center;
-  color: #ffffff;
+  color: #613d90;
 }
 
 .page-layout__viewport {
@@ -167,6 +167,7 @@ h2.checkout-header {
 input.text-input {
   border-radius: 5px;
   line-height: 50px;
+  border: none;
   // font-size: 36px;
   // padding: 2px;
 
@@ -176,7 +177,7 @@ input.text-input {
   display: flex;
   flex-direction: column;
   align-content: center;
-  justify-content: space-around;
+  justify-content: center;
 
   button {
     border-radius: 5px;
@@ -192,8 +193,37 @@ input.text-input {
     color: #613d90;
     background: #ffffff;
     border: #613d90 solid 1px;
+    cursor: pointer;
   }
 }
+
+input {
+  text-align: center;
+  width: 100%;
+  outline: 0;
+  border: 1px solid #e6e7e5;
+  box-sizing: border-box;
+}
+
+input:focus {
+  text-align: center;
+  width: 100%;
+  outline: 0;
+  border: 1px solid #613d90;
+  box-sizing: border-box;
+}
+
+
+
+.checkout-input {
+  border: 1px solid #e6e7e5;
+  border-radius: 3px;
+  margin-bottom: 5px;
+  text-align: center;
+  text-align: center;
+  box-sizing: border-box;
+}
+
 
 
 .footer {

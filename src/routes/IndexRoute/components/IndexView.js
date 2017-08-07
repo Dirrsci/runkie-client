@@ -20,6 +20,7 @@ export default class HomeView extends React.Component {
     this.songCell = this.songCell.bind(this)
     this.play = this.play.bind(this)
     this.columns = this.columns.bind(this)
+    this.calculateTotal = this.calculateTotal.bind(this);
   }
 
   componentDidMount() {
@@ -100,8 +101,18 @@ export default class HomeView extends React.Component {
     })
   }
 
+  calculateTotal() {
+    let { songs } = this.props;
+    if (songs.length === 0) return 0;
+    if (songs.length === 1) return 3;
+    if (songs.length === 2) return 5;
+    return songs.length * 2;
+
+  }
+
   render() {
     const { songs, vote } = this.props;
+    console.log('vote: ', vote);
     if (!this.props.songs) {
       return (<div> Error requesting page </div>);
     }
