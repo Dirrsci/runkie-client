@@ -3,6 +3,7 @@
 
 // Some best-practice CSS that's useful for most apps
 // Just remove them if they're not what you want
+
 html {
   box-sizing: border-box;
 }
@@ -137,6 +138,7 @@ hr {
     background: #613d90;
     color: #ffffff;
     border: #613d90 solid 1px;
+    cursor: pointer;
   }
 
   button:hover {
@@ -173,20 +175,42 @@ input.text-input {
 
 }
 
+.ReactModalPortal > * {
+    // When the modal is closed, overlay div has no css class
+    // This selector should be overridden by the `&--after-open` class below
+    opacity: 0;
+}
+.ReactModal__Overlay {
+    transition: opacity 200ms ease-in-out;
+    background: rgba(0, 0, 0, 0.15);
+    &--after-open {
+        opacity: 1;
+    }
+    &--before-close {
+        opacity: 0;
+    }
+}
+
 .ReactModal__Content {
   display: flex;
+  flex: 1;
   flex-direction: column;
   align-content: center;
   justify-content: center;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 
   button {
+    margin-top: 20px !important;
     border-radius: 5px;
     padding: 10px;
     background: #613d90;
     color: #ffffff;
     border: #613d90 solid 1px;
-    width: 50%;
     margin: 0 auto;
+    cursor: pointer;
   }
 
   button:hover {
@@ -198,31 +222,27 @@ input.text-input {
 }
 
 input {
-  text-align: center;
+  // text-align: center;
   width: 100%;
   outline: 0;
   border: 1px solid #e6e7e5;
   box-sizing: border-box;
 }
-
-input:focus {
-  text-align: center;
-  width: 100%;
-  outline: 0;
-  border: 1px solid #613d90;
-  box-sizing: border-box;
-}
-
 
 
 .checkout-input {
   border: 1px solid #e6e7e5;
   border-radius: 3px;
   margin-bottom: 5px;
-  text-align: center;
-  text-align: center;
   box-sizing: border-box;
+  padding-left: 10px;
 }
+
+.checkout-total {
+  text-align: center;
+}
+
+
 
 
 
