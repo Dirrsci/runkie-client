@@ -3,6 +3,7 @@ import ReactTable from 'react-table'
 import Checkout from './Checkout'
 import ReactModal from 'react-modal'
 import { Elements } from 'react-stripe-elements'
+import { CSSTransitionGroup } from 'react-transition-group'
 
 // import AudioPlayer from 'react-responsive-audio-player'
 import FontAwesome from 'react-fontawesome'
@@ -146,7 +147,7 @@ export default class HomeView extends React.Component {
         >
           <h2 className="checkout-header">Payment Information</h2>
           <Elements>
-            <Checkout vote={vote}/>
+            <Checkout songCount={this.getNumSelected(songs)} vote={vote}/>
           </Elements>
         </ReactModal>
       </div>

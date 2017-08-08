@@ -8,11 +8,11 @@ export default {
     backgroundColor   : 'rgba(26,35,51,.5)'
   },
   content : {
-    position                   : 'absolute',
-    top                        : '120px',
-    left                       : '120px',
-    right                      : '120px',
-    bottom                     : '120px',
+    position                   : null,
+    top                        : null,
+    left                       : null,
+    right                      : null,
+    bottom                     : null,
     border                     : '3px solid #e6e7e5',
     background                 : '#ffffff',
     overflow                   : 'auto',
@@ -20,6 +20,5 @@ export default {
     borderRadius               : '4px',
     outline                    : 'none',
     padding                    : '20px'
-
   }
 };

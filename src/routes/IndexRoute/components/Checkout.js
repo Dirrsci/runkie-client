@@ -64,7 +64,16 @@ class CheckoutForm extends React.Component {
     // this.props.stripe.createToken({type: 'card', name: 'Jenny Rosen'});
   }
 
+  calculateTotal(songCount) {
+    if (songCount === 0) return 0;
+    if (songCount === 1) return 3;
+    if (songCount === 2) return 5;
+    return songCount * 2;
+  }
+
   render() {
+    const { songCount } = this.props;
+
     return (
       <form onSubmit={this.handleSubmit} className="index-container">
         <div className="checkout-input"><TextInput
@@ -88,7 +97,10 @@ class CheckoutForm extends React.Component {
         <div className="checkout-input"><CardExpiryElement style={{base: {lineHeight: '50px'}}}/></div>
         <div className="checkout-input"><CardCVCElement style={{base: {lineHeight: '50px'}}}/></div>
         <div className="checkout-input"><PostalCodeElement style={{base: {lineHeight: '50px'}}}/></div>
-        <button>Confirm order</button>
+
+        <div className="checkout-total">You selected {songCount} songs. <br /> We will charge your credit card ${this.calculateTotal(songCount)}.00</div>
+
+        <button>Confirm Payment</button>
       </form>
     );
   }
