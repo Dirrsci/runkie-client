@@ -8,6 +8,7 @@
   },
   "author": "Michael Reeder",
   "scripts": {
+    "prod": "cross-env NODE_ENV=development pm2 start build/scripts/start",
     "clean": "rimraf dist",
     "compile": "node build/scripts/compile",
     "build": "npm run clean && cross-env NODE_ENV=production npm run compile",
