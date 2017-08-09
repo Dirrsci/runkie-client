@@ -202,7 +202,7 @@ input.text-input {
   top: 50%;
   transform: translate(-50%, -50%);
 
-  button {
+  button.notLoading {
     margin-top: 20px !important;
     border-radius: 5px;
     padding: 10px;
@@ -210,10 +210,22 @@ input.text-input {
     color: #ffffff;
     border: #613d90 solid 1px;
     margin: 0 auto;
-    cursor: pointer;
   }
 
-  button:hover {
+  button.isLoading {
+    margin-top: 20px !important;
+    border-radius: 5px;
+    padding: 10px;
+    background: #613d90;
+    color: #ffffff;
+    border: #613d90 solid 1px;
+    margin: 0 auto;
+    cursor: not-allowed;
+    background: #613d90;
+    width: inherit;
+  }
+
+  button.notLoading:hover {
     color: #613d90;
     background: #ffffff;
     border: #613d90 solid 1px;
@@ -314,4 +326,10 @@ input {
 *:before,
 *:after {
   box-sizing: inherit;
+}
+
+@media screen and (max-width: 480px) {
+  .mobile-hide {
+    display: none;
+  }
 }

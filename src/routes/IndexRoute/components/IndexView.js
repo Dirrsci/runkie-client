@@ -67,7 +67,7 @@ export default class HomeView extends React.Component {
   }
 
   songCell(c) {
-    const { id, title } = c.original
+    const { id } = c.original
     const { currentPlay } = this.state
 
     return (

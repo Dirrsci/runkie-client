@@ -9,7 +9,7 @@ export const PageLayout = ({ children }) => (
     <div className='container text-center'>
       <img src={require('../assets/site-banner.png')} width={'100%'}/>
       <div className="header-nav">
-        <Link to="/rules" style={{marginRight: 10}}><button>What Is This?</button></Link>
+        <Link to="/rules" style={{marginRight: 10}}><button>Rules</button></Link>
         <Link to="/" style={{marginRight: 10}}><button>Vote</button></Link>
         <Link to="/results"><button>Standings</button></Link>
       </div>

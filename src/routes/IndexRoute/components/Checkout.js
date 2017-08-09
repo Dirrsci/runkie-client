@@ -3,6 +3,7 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import { injectStripe, CardNumberElement, CardExpiryElement, CardCVCElement, PostalCodeElement } from 'react-stripe-elements';
 import TextInput from '../../../components/shared/TextInput';
+import classnames from 'classnames';
 
 // import AddressSection from './AddressSection';
 // import CardSection from './CardSection';
@@ -18,14 +19,15 @@ class CheckoutForm extends React.Component {
         email: false
       }
     }
+    this.calculateTotal = this.calculateTotal.bind(this);
   }
 
   calculateTotal() {
-    let { songs } = this.props;
-    if (songs.length === 0) return 0;
-    if (songs.length === 1) return 3;
-    if (songs.length === 2) return 5;
-    return songs.length * 2;
+    let { songCount } = this.props;
+    if (songCount === 0) return 0;
+    if (songCount === 1) return 3;
+    if (songCount === 2) return 5;
+    return songCount * 2;
 
   }
 
@@ -33,7 +35,7 @@ class CheckoutForm extends React.Component {
     // We don't want to let default form submission happen here, which would refresh the page.
     ev.preventDefault()
 
-    this.setState({ error: {} })
+    this.setState({ error: {}, isLoading: true })
 
     const name = this.name.value
     const email = this.email.value
@@ -53,6 +55,7 @@ class CheckoutForm extends React.Component {
         if (res.error) return alert(res.error.message)
         return this.props.vote(res.token, this.name.value, this.email.value)
           .then(() => {
+            this.setState({isLoading: false});
             this.props.router.push('/results');
           });
       })
@@ -62,13 +65,6 @@ class CheckoutForm extends React.Component {
 
     // However, this line of code will do the same thing:
     // this.props.stripe.createToken({type: 'card', name: 'Jenny Rosen'});
-  }
-
-  calculateTotal(songCount) {
-    if (songCount === 0) return 0;
-    if (songCount === 1) return 3;
-    if (songCount === 2) return 5;
-    return songCount * 2;
   }
 
   render() {
@@ -100,7 +96,7 @@ class CheckoutForm extends React.Component {
 
         <div className="checkout-total">You selected {songCount} songs. <br /> We will charge your credit card ${this.calculateTotal(songCount)}.00</div>
 
-        <button>Confirm Payment</button>
+        <button className={classnames({isLoading: this.state.isLoading, notLoading: !this.state.isLoading })} onClick={() => this.handleSubmit}>{(this.state.isLoading) ? <img src={require('../../../layouts/assets/spinner.svg')} /> : 'Confirm Payment'}</button>
       </form>
     );
   }
