@@ -5,6 +5,7 @@ import ResultsRoute from './Results'
 import RulesRoute from './Rules'
 import AboutRoute from './About'
 import PrizesRoute from './Prizes'
+import VoteRoute from './Vote'
 
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
@@ -17,7 +18,8 @@ export const createRoutes = (store) => ({
     ResultsRoute(store),
     RulesRoute(store),
     AboutRoute(store),
-    PrizesRoute(store)
+    PrizesRoute(store),
+    VoteRoute(store)
   ]
 })
 
