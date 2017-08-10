@@ -5,6 +5,7 @@ $spacing: 30px;
   display: flex;
   padding: 10px;
   font-size: 1.2rem;
+  flex-wrap: wrap-reverse;
 }
 
 .info-column {
@@ -17,6 +18,7 @@ $spacing: 30px;
 
 .prize-column {
   flex: 1;
+  min-width: 300px;
 }
 
 .pricing {
