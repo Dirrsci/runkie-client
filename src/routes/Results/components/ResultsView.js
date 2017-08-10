@@ -89,7 +89,7 @@ export default class HomeView extends React.Component {
 
   columns() {
     const columns = []
-    columns.push({ Header: 'Preview', accessor: 'title', Cell: this.songCell })
+    // columns.push({ Header: 'Preview', accessor: 'title', Cell: this.songCell })
     columns.push({ Header: 'Song Title', accessor: 'title', Cell: this.titleCell, sortable: false })
     columns.push({ Header: 'Votes', accessor: 'count', Cell: this.voteCountCell })
     return columns

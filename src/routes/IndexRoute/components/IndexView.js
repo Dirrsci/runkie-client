@@ -21,7 +21,7 @@ export default class HomeView extends React.Component {
               <span>3+ for $2.00 per vote</span>
             </div>
             <span className="sold">Sold: xxz</span>
-            <p className="expire">Sales for this item expire 7-21-17</p>
+            <p className="expire">Raffle Ends August 21st 2017</p>
             <button className="button-raffle">Buy Raffle Tickets</button>
             <p className="proceeds">
               Enter to win Resonance 2017 tickets with the purchase of a $3 raffle ticket!
