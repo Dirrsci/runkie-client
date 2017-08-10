@@ -1,7 +1,8 @@
 const NODE_ENV = process.env.NODE_ENV || 'development'
 
 const apiUrls = {
-  development: 'http://localhost:8080'
+  development: 'http://localhost:8080',
+  production: 'http://104.236.0.43:8080'
 }
 
 module.exports = {
