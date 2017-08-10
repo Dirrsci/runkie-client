@@ -3,6 +3,8 @@ import CoreLayout from '../layouts/PageLayout/PageLayout'
 import IndexRoute from './IndexRoute'
 import ResultsRoute from './Results'
 import RulesRoute from './Rules'
+import AboutRoute from './About'
+import PrizesRoute from './Prizes'
 
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
@@ -13,7 +15,9 @@ export const createRoutes = (store) => ({
   indexRoute: IndexRoute(store),
   childRoutes: [
     ResultsRoute(store),
-    RulesRoute(store)
+    RulesRoute(store),
+    AboutRoute(store),
+    PrizesRoute(store)
   ]
 })
 

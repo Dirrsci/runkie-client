@@ -120,6 +120,7 @@ export default class HomeView extends React.Component {
     console.log('style: ', require('./modal-styles.js'));
     return (
       <div className="index-container">
+        <h4 style={{color: '#fff'}}>Prize: One (1) Free Ticket to Resonance Music Festival 2017</h4>
         <div className="ballot-table">
           <ReactTable
             minRows={3}
